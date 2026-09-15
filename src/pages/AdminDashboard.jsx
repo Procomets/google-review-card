@@ -6,7 +6,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import UserModule from './UserModule.jsx';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export default function AdminDashboard() {
   const { currentUser, logout, loading } = useAuth();
