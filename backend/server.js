@@ -91,15 +91,20 @@ function requireAdmin(req, res, next) {
   }
   const token = authHeader.split(' ')[1];
   
-  getAuth().verifyIdToken(token)
-    .then((decodedToken) => {
-      req.user = decodedToken;
-      next();
-    })
-    .catch((error) => {
-      console.error('Error verifying Firebase ID token:', error);
-      return res.status(403).json({ success: false, error: 'Forbidden' });
-    });
+  try {
+    getAuth().verifyIdToken(token)
+      .then((decodedToken) => {
+        req.user = decodedToken;
+        next();
+      })
+      .catch((error) => {
+        console.error('Error verifying Firebase ID token:', error);
+        return res.status(403).json({ success: false, error: 'Forbidden' });
+      });
+  } catch (error) {
+    console.error('Firebase Admin is not initialized:', error);
+    return res.status(500).json({ success: false, error: 'Firebase Admin not initialized on the server.' });
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
