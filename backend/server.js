@@ -707,10 +707,8 @@ app.use((_req, res) => {
 
 export default app;
 
-if (process.env.VERCEL !== '1') {
-  app.listen(PORT, () => {
-    console.log('\n🚀  Backend running on http://localhost:' + PORT);
-    console.log('   CORS allowed origin: ' + allowedOriginSetting);
-    console.log('   API key configured:  ' + (GOOGLE_API_KEY ? '✅' : '❌ MISSING') + '\n');
-  });
-}
+app.listen(PORT, () => {
+  console.log('\n🚀  Backend running on http://localhost:' + PORT);
+  console.log('   CORS allowed origin: ' + allowedOriginSetting);
+  console.log('   API key configured:  ' + (GOOGLE_API_KEY ? '✅' : '❌ MISSING') + '\n');
+});
